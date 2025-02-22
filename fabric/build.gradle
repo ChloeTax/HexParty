@@ -1,5 +1,6 @@
 plugins {
     id 'com.github.johnrengelman.shadow'
+    id "me.modmuss50.mod-publish-plugin" version "0.8.4"
 }
 
 architectury {
@@ -91,4 +92,37 @@ shadowJar {
 
 remapJar {
     input.set shadowJar.archiveFile
+}
+
+publishMods {
+    file = remapJar.archiveFile
+    additionalFiles.from(sourcesJar.archiveFile)
+    changelog = getLatestChangelog()
+    type = STABLE
+    modLoaders.add("fabric")
+    modLoaders.add("quilt")
+
+    version = project.version + "-fabric"
+    displayName = "HexWeb $project.version [Fabric]"
+
+    curseforge {
+        accessToken = project.curseforge_api_token
+        projectId = project.curseforge_id
+        minecraftVersions.add(minecraft_version)
+
+        requires("fabric-api", "architectury-api", "kotlin-for-forge", "hexcasting", "moreiotas")
+    }
+
+    modrinth {
+        accessToken = project.modrinth_api_token
+        projectId = project.modrinth_id
+        minecraftVersions.add(minecraft_version)
+
+        requires("architectury-api")
+        requires("kotlin-for-forge")
+        requires("hex-casting")
+        requires("moreiotas")
+
+        optional("hexical")
+    }
 }
