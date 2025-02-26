@@ -1,3 +1,3 @@
 # Changelog
 
-- Fixed Forge `mods.toml`
+- Added Hexical version requirement due to breaking changes
