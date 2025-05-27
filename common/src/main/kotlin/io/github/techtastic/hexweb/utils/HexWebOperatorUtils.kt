@@ -10,9 +10,11 @@ import dev.architectury.platform.Platform
 import io.github.techtastic.hexweb.HTTPRequestsHandler
 import io.github.techtastic.hexweb.casting.iota.JsonIota
 import io.github.techtastic.hexweb.casting.iota.ResponseIota
+import io.github.techtastic.hexweb.casting.mishap.MishapBlacklistUrl
 import io.github.techtastic.hexweb.casting.mishap.MishapCannotJson
 import io.github.techtastic.hexweb.casting.mishap.MishapIOException
 import io.github.techtastic.hexweb.casting.mishap.MishapTooEarly
+import io.github.techtastic.hexweb.config.HexWebConfig
 import io.github.techtastic.hexweb.interop.HexicalInterop.toHexicalIota
 import io.github.techtastic.hexweb.interop.HexicalInterop.toHexicalJson
 import net.minecraft.core.registries.BuiltInRegistries
@@ -139,5 +141,11 @@ object HexWebOperatorUtils {
         }
 
         throw MishapCannotJson(this)
+    }
+
+    fun checkBlacklist(url: String) {
+        HexWebConfig.ADDRESS_BLACKLIST.get().forEach { blacklist ->
+            if (url.contains(blacklist)) throw MishapBlacklistUrl(blacklist)
+        }
     }
 }

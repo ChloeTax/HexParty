@@ -42,6 +42,8 @@ repositories {
         name = "Fuzs Mod Resources"
         url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
     }
+    maven { url = "https://maven.kosmx.dev/" }
+    maven { url = "https://maven.terraformersmc.com/releases" }
 }
 
 dependencies {
@@ -60,6 +62,7 @@ dependencies {
     modImplementation "vazkii.patchouli:Patchouli:${minecraft_version}-${patchouli_version}-FABRIC"
     modImplementation "at.petra-k.hexcasting:hexcasting-fabric-${minecraft_version}:${hexcasting_version}"
     modRuntimeOnly "at.petra-k.paucal:paucal-fabric-${minecraft_version}:${paucal_version}"
+    modRuntimeOnly "com.samsthenerd.inline:inline-fabric:$minecraft_version-$inline_version"
     modRuntimeOnly "dev.onyxstudios.cardinal-components-api:cardinal-components-api:${cca_version}"
     modRuntimeOnly files("${rootProject.rootDir}/libs/serialization-hooks-0.4.99999.jar")
     modImplementation("software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}")
@@ -69,6 +72,7 @@ dependencies {
 
     modImplementation files("${rootProject.rootDir}/libs/moreiotas-fabric-1.20.1-0.1.0-3.jar")
     modImplementation files("${rootProject.rootDir}/libs/hexical-1.5.0.jar")
+    modRuntimeOnly("dev.kosmx.player-anim:player-animation-lib-fabric:1.0.2-rc1+1.20")
 
     include(implementation "com.squareup.okhttp3:okhttp:${okhttp_version}")
     include(implementation "com.squareup.okio:okio:${okio_version}")
