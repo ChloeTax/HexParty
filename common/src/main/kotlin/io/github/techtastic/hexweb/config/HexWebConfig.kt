@@ -14,7 +14,7 @@ object HexWebConfig {
         BUILDER.push("HexWeb Configs")
         ADDRESS_BLACKLIST = BUILDER
             .comment("A blacklist of addresses HTTP requests and the like cannot be sent to!")
-            .defineList("Address Blacklist", listOf("127.0.0.1")) { s -> s is String }
+            .defineList("Address Blacklist", listOf("127\\.0\\.0\\.1")) { s -> s is String }
         BUILDER.pop()
         SPEC = BUILDER.build()
     }
