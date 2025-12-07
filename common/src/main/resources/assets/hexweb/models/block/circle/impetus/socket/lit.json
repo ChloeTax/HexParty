@@ -1,12 +1,9 @@
 {
-  "parent": "minecraft:block/cube",
+  "parent": "hexweb:block/circle/impetus/socket/dim",
   "textures": {
-    "down": "hexcasting:block/circle/bottom",
-    "east": "hexweb:block/circle/impetus/socket/left_lit",
-    "north": "hexweb:block/circle/impetus/socket/front_lit",
-    "particle": "hexcasting:block/slate",
-    "south": "hexcasting:block/circle/impetus/back_lit",
-    "up": "hexweb:block/circle/impetus/socket/top_lit",
-    "west": "hexweb:block/circle/impetus/socket/right_lit"
+    "top": "hexweb:block/circle/impetus/socket/top_lit",
+    "front": "hexweb:block/circle/impetus/socket/front_lit",
+    "back": "hexcasting:block/circle/impetus/back_lit",
+    "side": "hexweb:block/circle/impetus/socket/side_lit"
   }
 }
