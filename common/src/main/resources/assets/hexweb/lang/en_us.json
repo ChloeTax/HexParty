@@ -46,6 +46,6 @@
   "hexweb.page.socket_spells.entry": "I must be mad. I have further augmented the device to allow for sending information to those other realities. SOme even whisper back in cyphers I may yet understand...",
   "hexcasting.action.hexweb:send": "Send",
   "hexweb.page.socket_spells.send": "Utilizing the Socket Impetus used to trigger the Spell Circle, this sends the provided data through the Socket's connection.",
-  "hexcasting.action.hexweb:set": "Set",
+  "hexcasting.action.hexweb:set": "Establish",
   "hexweb.page.socket_spells.set": "Given the position for a Socket Impetus, attempts to establish a new Socket connection."
 }
