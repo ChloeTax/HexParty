@@ -59,7 +59,7 @@ object HexWebActions {
     ) }
 
     val SEND = ACTIONS.register("send") { ActionRegistryEntry(
-        HexPattern.fromAngles("qewqawqeq", HexDir.NORTH_WEST),
+        HexPattern.fromAngles("qewqawqeq", HexDir.NORTH_EAST),
         OpSendSocket
     ) }
 

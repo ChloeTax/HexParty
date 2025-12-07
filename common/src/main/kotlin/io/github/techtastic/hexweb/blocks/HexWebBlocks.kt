@@ -13,13 +13,11 @@ object HexWebBlocks {
     private val BLOCKS = DeferredRegister.create(HexWeb.MOD_ID, Registries.BLOCK)
     private val ITEMS = DeferredRegister.create(HexWeb.MOD_ID, Registries.ITEM)
 
-    val SOCKET_IMPETUS = BLOCKS.register("impetus/socket") { BlockSocketImpetus(BlockBehaviour.Properties.copy(HexBlocks.IMPETUS_EMPTY)) }
+    val SOCKET_IMPETUS = BLOCKS.register("impetus/socket") { BlockSocketImpetus(BlockBehaviour.Properties.copy(HexBlocks.IMPETUS_LOOK)) }
 
     fun register() {
         BLOCKS.register()
-        BLOCKS.forEach { supp ->
-            ITEMS.register(supp.id) { BlockItem(supp.get(), Item.Properties()) }
-        }
+        ITEMS.register(SOCKET_IMPETUS.id) { BlockItem(SOCKET_IMPETUS.get(), Item.Properties()) }
         ITEMS.register()
     }
 }
