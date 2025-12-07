@@ -24,7 +24,7 @@ import ram.talia.moreiotas.api.casting.iota.StringIota
 import java.net.http.HttpResponse
 
 object HexWebOperatorUtils {
-    val CANNOT_DESERIALIZE = TagKey.create(HexRegistries.IOTA_TYPE, ResourceLocation(HexWeb.MOD_ID, "illegal_interworld"));
+    val CANNOT_DESERIALIZE = TagKey.create(HexRegistries.IOTA_TYPE, ResourceLocation(HexWeb.MOD_ID, "cannot_deserialize"));
 
     fun List<Iota>.getJsonObject(idx: Int, argc: Int): JsonObject {
         if (idx >= 0 && idx <= this.lastIndex) {

@@ -24,6 +24,7 @@ dependencies {
     modCompileOnly ("ram.talia.moreiotas:moreiotas-fabric-$minecraft_version:$more_iotas_version") { transitive = false }
     modCompileOnly ("ram.talia.hexal:hexal-fabric-$minecraft_version:$hexal_version") { transitive = false }
     modCompileOnly "maven.modrinth:hexical:$hexical_version"
+    modCompileOnly "penguinencounter.mediatransport:mediatransport-common:$mediatransport_version+$minecraft_version"
 
 
     modApi "fuzs.forgeconfigapiport:forgeconfigapiport-common:8.0.0"

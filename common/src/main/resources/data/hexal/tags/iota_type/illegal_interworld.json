@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "hexweb:response",
-    "hexweb:socket"
+    "hexweb:response"
   ]
 }

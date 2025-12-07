@@ -2,7 +2,6 @@
   "replace": false,
   "values": [
     "hexcasting:entity",
-    "hexweb:socket",
     "hexweb:response",
     "hexical:pigment",
     "#hexal:illegal_interworld"
