@@ -73,7 +73,7 @@ dependencies {
     modImplementation ("ram.talia.moreiotas:moreiotas-fabric-$minecraft_version:$more_iotas_version") { transitive = false }
     modImplementation ("ram.talia.hexal:hexal-fabric-$minecraft_version:$hexal_version") { transitive = false }
     modImplementation "maven.modrinth:hexical:$hexical_version"
-    modImplementation "penguinencounter.mediatransport:mediatransport-fabric:$mediatransport_version+$minecraft_version"
+    modCompileOnly "penguinencounter.mediatransport:mediatransport-fabric:$mediatransport_version+$minecraft_version"
     modRuntimeOnly "dev.kosmx.player-anim:player-animation-lib-fabric:1.0.2-rc1+1.20"
 
     modImplementation "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:8.0.0"
