@@ -16,6 +16,10 @@
       "text": "hexweb.page.brainsweeping.impetus_socket"
     },
     {
+      "type": "patchouli:text",
+      "text": "hexweb.page.socket_patterns.usage"
+    },
+    {
       "type": "hexcasting:pattern",
       "op_id": "hexweb:read",
       "anchor": "hexweb:read",

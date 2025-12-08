@@ -2,7 +2,7 @@
   "type": "hexcasting:brainsweep",
   "blockIn": {
     "type": "block",
-    "block": "hexcasting:impetus/socket"
+    "block": "hexcasting:impetus/empty"
   },
   "cost": 1000000,
   "entityIn": {
