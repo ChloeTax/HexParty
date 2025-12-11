@@ -3,7 +3,7 @@ name: Release new version
 on:
   workflow_dispatch:
     inputs:
-      release:
+      publish:
         description: Release this version
         type: boolean
         default: false
@@ -34,7 +34,7 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     with:
       python-version: '3.11'
-      release: inputs.release
+      release: inputs.publish
 
   publish-docs-pypi:
     runs-on: ubuntu-latest
@@ -57,7 +57,7 @@ jobs:
 
   publish:
     runs-on: ubuntu-latest
-    if: inputs.release == 'true'
+    if: inputs.publish == 'true'
     environment:
       name: ${{ !inputs.dry_run && 'publishing' || '' }}
     steps:
