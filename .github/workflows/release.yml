@@ -20,6 +20,8 @@ on:
 
 env:
   PYPI_PACKAGE: hexdoc-hexweb
+  MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+  CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
 
 permissions:
   contents: read

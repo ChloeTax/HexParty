@@ -93,20 +93,17 @@ publishMods {
 
     version = project.version + "-forge"
     displayName = "HexWeb $project.version [Forge]"
-
     curseforge {
-        if (System.getenv("CURSEFORGE_TOKEN") != null) {
-            accessToken = System.getenv("CURSEFORGE_TOKEN")
-            projectId = project.curseforge_id
-            minecraftVersions.add(minecraft_version)
+        accessToken = System.getenv("CURSEFORGE_TOKEN") == null ? "" : System.getenv("CURSEFORGE_TOKEN")
+        projectId = curseforge_id
+        minecraftVersions.add(minecraft_version)
 
-            requires("architectury-api", "kotlin-for-forge", "hexcasting", "moreiotas")
-        }
+        requires("architectury-api", "kotlin-for-forge", "hexcasting", "moreiotas")
     }
 
     modrinth {
-        accessToken = System.getenv("MODRINTH_TOKEN")
-        projectId = project.modrinth_id
+        accessToken = System.getenv("MODRINTH_TOKEN") == null ? "" : System.getenv("MODRINTH_TOKEN")
+        projectId = modrinth_id
         minecraftVersions.add(minecraft_version)
 
         requires("architectury-api")
