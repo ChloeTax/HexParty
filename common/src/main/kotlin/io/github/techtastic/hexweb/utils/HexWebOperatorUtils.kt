@@ -9,7 +9,6 @@ import com.google.gson.*
 import com.mojang.serialization.JsonOps
 import io.github.techtastic.hexweb.HTTPRequestsHandler
 import io.github.techtastic.hexweb.HexWeb
-import io.github.techtastic.hexweb.casting.HexWebIotaTypes
 import io.github.techtastic.hexweb.casting.iota.JsonIota
 import io.github.techtastic.hexweb.casting.iota.ResponseIota
 import io.github.techtastic.hexweb.casting.mishap.MishapBlacklistUrl
@@ -23,40 +22,67 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.TagKey
 import ram.talia.moreiotas.api.casting.iota.StringIota
 import java.net.http.HttpResponse
+import kotlin.jvm.optionals.getOrNull
 
 object HexWebOperatorUtils {
     val CANNOT_DESERIALIZE = TagKey.create(HexRegistries.IOTA_TYPE, ResourceLocation(HexWeb.MOD_ID, "cannot_deserialize"));
 
     fun List<Iota>.getJsonObject(idx: Int, argc: Int): JsonObject {
-        if (idx >= 0 && idx <= this.lastIndex) {
-            val iota = this[idx]
-            if (iota is JsonIota)
-                return iota.getPayload()
-            throw MishapInvalidIota.ofType(iota, if (argc == 0) idx else argc - (idx + 1), "json")
+        val iota = this.getOrNull(idx) ?: throw MishapNotEnoughArgs(idx + 1, this.size)
+        if (iota is JsonIota)
+            return iota.getPayload()
+        throw MishapInvalidIota.ofType(iota, if (argc == 0) idx else argc - (idx + 1), "json")
+    }
+
+    fun List<Iota>.getHeaders(idx: Int, argc: Int): Array<String>? {
+        val iota = this.getOrNull(idx) ?: return null
+        if (iota is ListIota) {
+            val list = iota.list
+            if (!list.nonEmpty) return null
+            if (list.size() % 2 != 0 || list.any { iota -> iota !is StringIota })
+                throw MishapInvalidIota.ofType(iota, if (argc == 0) idx else argc - (idx + 1), "headers.list")
+            return list.map { iota -> (iota as StringIota).string }.toTypedArray()
         }
-        throw MishapNotEnoughArgs(idx + 1, this.size)
+        if (iota is JsonIota) {
+            val json = iota.json.asMap()
+            if (json.isEmpty()) return null
+            if (json.values.any { !it.isJsonPrimitive || it.asJsonPrimitive.isString })
+                throw MishapInvalidIota.ofType(iota, if (argc == 0) idx else argc - (idx + 1), "headers.json")
+            val list = mutableListOf<String>()
+            json.forEach { (key, value) ->
+                list.add(key)
+                list.add(value.asJsonPrimitive.asString)
+            }
+            return list.toTypedArray()
+        }
+        // Handle Maps
+        // Handle Dict
+        throw MishapInvalidIota.ofType(iota, if (argc == 0) idx else argc - (idx + 1), "headers")
+    }
+
+    fun List<Iota>.getBodyString(idx: Int, argc: Int): String? {
+        val iota = this.getOrNull(idx) ?: return null
+        if (iota is JsonIota)
+            return iota.getPayload().asString
+        if (iota is StringIota)
+            return iota.string
+        throw MishapInvalidIota.ofType(iota, if (argc == 0) idx else argc - (idx + 1), "body")
     }
 
     fun List<Iota>.getResponse(idx: Int, argc: Int): HttpResponse<String> {
-        if (idx >= 0 && idx <= this.lastIndex) {
-            val iota = this[idx]
-            if (iota is ResponseIota) {
-                val either = HTTPRequestsHandler.getResponse(iota.getPayload()) ?: throw MishapTooEarly()
-                if (either.right().isPresent) {
-                    HTTPRequestsHandler.clearResponse(iota.getPayload())
-                    throw MishapResponseError(either.right().get())
-                }
-                return try {
-                    val response = either.left().orElseThrow()
-                    HTTPRequestsHandler.clearResponse(iota.getPayload())
-                    response
-                } catch (ignored: Exception) {
-                    throw MishapTooEarly()
-                }
+        val iota = this.getOrNull(idx) ?: throw MishapNotEnoughArgs(idx + 1, this.size)
+        if (iota is ResponseIota) {
+            val either = HTTPRequestsHandler.getResponse(iota.getPayload()) ?: throw MishapTooEarly()
+            either.right().ifPresent {
+                HTTPRequestsHandler.clearResponse(iota.getPayload())
+                throw MishapResponseError(either.right().get())
             }
-            throw MishapInvalidIota.ofType(iota, if (argc == 0) idx else argc - (idx + 1), "response")
+            return either.left().getOrNull()?.let {
+                HTTPRequestsHandler.clearResponse(iota.getPayload())
+                it
+            } ?: throw MishapTooEarly()
         }
-        throw MishapNotEnoughArgs(idx + 1, this.size)
+        throw MishapInvalidIota.ofType(iota, if (argc == 0) idx else argc - (idx + 1), "response")
     }
 
     fun JsonElement.toIota(level: ServerLevel?): Iota {
@@ -72,10 +98,10 @@ object HexWebOperatorUtils {
 
         val json = this.asJsonObject
         val nbt = JsonOps.INSTANCE.convertTo(NbtOps.INSTANCE, json) as? CompoundTag
-        IotaType.getTypeFromTag(nbt)?.let { type ->
-            if (preventDeserialization(type)) return GarbageIota()
-            return type.deserialize(nbt, level) ?: GarbageIota()
-        } ?: return JsonIota(json)
+        return IotaType.getTypeFromTag(nbt)?.let { type ->
+            if (preventDeserialization(type)) GarbageIota()
+            type.deserialize(nbt, level) ?: GarbageIota()
+        } ?: JsonIota(json)
     }
 
     fun Iota.toJson(): JsonElement {

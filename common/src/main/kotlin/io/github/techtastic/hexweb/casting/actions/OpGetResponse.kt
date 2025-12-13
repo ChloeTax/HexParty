@@ -17,7 +17,7 @@ object OpGetResponse: ConstMediaAction {
 
         val json = JsonObject()
         json.addProperty("code", response.statusCode())
-        json.add("body", JsonParser.parseString(response.body() ?: "{}"))
+        json.addProperty("body", response.body())
         return listOf(JsonIota(json))
     }
 }
