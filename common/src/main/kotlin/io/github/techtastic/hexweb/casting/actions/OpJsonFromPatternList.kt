@@ -3,10 +3,8 @@ package io.github.techtastic.hexweb.casting.actions
 import at.petrak.hexcasting.api.casting.castables.ConstMediaAction
 import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.getList
-import at.petrak.hexcasting.api.casting.iota.DoubleIota
+
 import at.petrak.hexcasting.api.casting.iota.Iota
-import at.petrak.hexcasting.api.casting.iota.ListIota
-import io.github.techtastic.hexweb.HexWeb
 import io.github.techtastic.hexweb.casting.iota.JsonIota
 import io.github.techtastic.hexweb.utils.IotaParser
 

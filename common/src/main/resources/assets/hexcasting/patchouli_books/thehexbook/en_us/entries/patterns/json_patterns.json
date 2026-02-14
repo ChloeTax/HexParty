@@ -48,6 +48,22 @@
       "input": "json, str, any",
       "output": "json",
       "text": "hexweb.page.json_patterns.set_element"
+    },
+    {
+      "type":  "hexcasting:pattern",
+      "op_id":  "hexweb:json_to_pattern_list",
+      "anchor": "hexweb:json_to_pattern_list",
+      "input": "json",
+      "output": "list",
+      "text": "hexweb.page.json.patterns.json_to_pattern_list"
+    },
+    {
+      "type":  "hexcasting:pattern",
+      "op_id":  "hexweb:json_from_pattern_list",
+      "anchor": "hexweb:json_from_pattern_list",
+      "input": "list",
+      "output": "json",
+      "text": "hexweb.page.json.patterns.json_from_pattern_list"
     }
   ]
 }

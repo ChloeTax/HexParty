@@ -29,8 +29,10 @@
   "hexweb.page.json_patterns.get_element": "Gets the stored iota at the given key. Mishaps upon their being no iota.",
   "hexcasting.action.hexweb:set_element": "Jason's Exaltation",
   "hexweb.page.json_patterns.set_element": "Sets the given iota at the given key. Setting a Garbage iota removes the key.",
-  "hexcasting.action.hexweb:json_to_pattern_list": "Jason's Purification II",
+  "hexcasting.action.hexweb:json_to_pattern_list": "Jayden's Purification",
   "hexweb.page.json.patterns.json_to_pattern_list": "Turns the given JSON iota into a list of iotas. The note beneath says it uses ducky peripherals' iota mappings, whatever that means.",
+  "hexcasting.action.hexweb:json_from_pattern_list": "Jayden's Purification II",
+  "hexweb.page.json.patterns.json_from_pattern_list": "Turns the given list into JSON. Like its sister pattern, it uses ducky peripherals' iota mappings.",
 
   "hexweb.entry.http_spells": "HTTP Spells",
   "hexweb.page.http_spells.entry": "While pondering the depths of one's mind, Sir Bernes-Lee caught a glimpse into another universe. With this view fresh in his mind, he quickly conjured a JSON object, imbued it with information, and sent it hurdling into the other universe.$(br)These are the patterns recovered after Berners-Lee was found dead having received enough information back to fry his mind.",
