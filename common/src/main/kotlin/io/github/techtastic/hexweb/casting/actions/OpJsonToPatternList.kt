@@ -5,6 +5,7 @@ import at.petrak.hexcasting.api.casting.eval.CastingEnvironment
 import at.petrak.hexcasting.api.casting.iota.Iota
 import io.github.techtastic.hexweb.utils.IotaParser
 import io.github.techtastic.hexweb.utils.HexWebOperatorUtils.getJsonObject
+
 object OpJsonToPatternList: ConstMediaAction {
     override val argc: Int
         get() = 1
